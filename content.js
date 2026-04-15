@@ -618,7 +618,7 @@ function createOverlay(slotEl) {
       if (req) {
         setInspectorPanel({
           adUnit: req.adUnit || live.adUnit || '',
-          queryId: req.gamId || queryId || live.queryId || '',
+          queryId: queryId || getQueryIdForSlot(slotId) || live.queryId || req.gamId || '',
           bidder: req.hb_bidder || live.bidder || '',
           creativeId: req.hb_crid || live.creativeId || '',
           adDomain: req.ad_domain || live.adDomain || ''
@@ -773,7 +773,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       bidder,
       creativeId,
       adDomain,
-      queryId: gamId || getQueryIdForSlot(slotId),
+      queryId: getQueryIdForSlot(slotId) || gamId || '',
       adUnit,
       ts
     });
